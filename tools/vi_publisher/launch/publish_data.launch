@@ -1,0 +1,40 @@
+<launch>
+
+  <!-- <group ns="turtlesim1">
+    <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+  </group>
+
+  <group ns="turtlesim2">
+    <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+  </group> -->
+
+  <!-- <node name="record" pkg="rosbag" type="record" args="output-name=/media/mrwhite/OS/kalibr/calib.bag buffsize=0 /imu0 /cam0/image_raw">  </node> -->
+
+  <!-- <node name="image_node" pkg="vi_publisher" type="image_node" args="/home/mrwhite/Datasets/calib/1920x1080/20200710_14-43-31-916.mp4">   </node>
+  <node name="imu_node" pkg="vi_publisher" type="imu_node" args="/home/mrwhite/Datasets/calib/1920x1080/20200710_14-43-31-916.csv">    </node> -->
+
+  <!-- <node name="image_node" pkg="vi_publisher" type="image_node" args="/home/mrwhite/Datasets/data_to_Donglin/20200413_C_and_A_1/20200413_13-04-39-095.mp4">   </node>
+  <node name="imu_node" pkg="vi_publisher" type="imu_node" args="/home/mrwhite/Datasets/data_to_Donglin/20200413_C_and_A_1/20200413_13-04-39-095.csv">    </node> -->
+
+  <!-- <node name="image_node" pkg="vi_publisher" type="image_node" args="/home/mrwhite/Datasets/data_to_Donglin/20200413_C_and_A_2/20200413_13-06-52-378.mp4">   </node>
+  <node name="imu_node" pkg="vi_publisher" type="imu_node" args="/home/mrwhite/Datasets/data_to_Donglin/20200413_C_and_A_2/20200413_13-06-52-378.csv">    </node> -->
+
+  <!-- <node name="image_node" pkg="vi_publisher" type="image_node" args="/home/mrwhite/Datasets/data_to_Donglin/20200413_Carrefour_1/20200413_12-41-17-886.mp4">   </node>
+  <node name="imu_node" pkg="vi_publisher" type="imu_node" args="/home/mrwhite/Datasets/data_to_Donglin/20200413_Carrefour_1/20200413_12-41-17-886.csv">    </node> -->
+
+  <!-- <node name="image_node" pkg="vi_publisher" type="image_node" args="/home/mrwhite/Datasets/data_to_Donglin/20200413_Carrefour_2/20200413_12-47-20-688.mp4">   </node>
+  <node name="imu_node" pkg="vi_publisher" type="imu_node" args="/home/mrwhite/Datasets/data_to_Donglin/20200413_Carrefour_2/20200413_12-47-20-688.csv">    </node> -->
+
+  <!-- <node name="image_node" pkg="vi_publisher" type="image_node" args="/home/mrwhite/Datasets/store1/store1.mp4">   </node>
+  <node name="imu_node" pkg="vi_publisher" type="imu_node" args="/home/mrwhite/Datasets/store1/store1.csv">    </node> -->
+
+  <!-- <node name="image_node" pkg="vi_publisher" type="image_node" args="/home/mrwhite/Datasets/store1/calibration/20200728_15-15-38-600.mp4">   </node>
+  <node name="imu_node" pkg="vi_publisher" type="imu_node" args="/home/mrwhite/Datasets/store1/calibration/20200728_15-15-38-600.csv">    </node> -->
+
+  <!-- <node name="image_node" pkg="vi_publisher" type="image_node" args="/media/mrwhite/OS/kalibr/20200806_18-20-49-495.mp4">   </node>
+  <node name="imu_node" pkg="vi_publisher" type="imu_node" args="/media/mrwhite/OS/kalibr/20200806_18-20-49-495.csv">    </node> -->
+
+<node name="image_node" pkg="vi_publisher" type="image_node" args="/home/mrwhite/Datasets/data_to_Donglin/20200418_BHG/20200418_19-26-44-443.mp4">   </node>
+  <node name="imu_node" pkg="vi_publisher" type="imu_node" args="/home/mrwhite/Datasets/data_to_Donglin/20200418_BHG/20200418_19-26-44-443.csv">    </node>
+
+</launch>
