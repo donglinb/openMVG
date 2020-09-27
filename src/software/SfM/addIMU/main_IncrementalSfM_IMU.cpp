@@ -27,6 +27,7 @@
 #include <memory>
 #include <string>
 #include <utility>
+#include <fstream>
 
 using namespace openMVG;
 using namespace openMVG::cameras;
@@ -67,6 +68,40 @@ bool computeIndexFromImageNames(
       initialPairIndex.second != UndefinedIndexT);
 }
 
+IndexT GetIndexFromImageName(const SfM_Data& sfm_data, const std::string& filename)
+{
+    IndexT idx = UndefinedIndexT;
+    std::string file_name = stlplus::filename_part(filename);
+    for(Views::const_iterator it = sfm_data.GetViews().begin(); it != sfm_data.GetViews().end(); ++it)
+    {
+        const View *v = it->second.get();
+        const std::string filename_i = stlplus::filename_part(v->s_Img_path);
+        if(filename_i == file_name)
+        {
+            idx = v->id_view;
+            break;
+        }
+    }
+
+    return idx;
+}
+
+/// assume the view stamps file is stored following the format: (image_name time_stamp) each line
+bool ReadViewStamps(const SfM_Data& sfm_data, SequentialSfMReconstructionEngineIMU::ViewStamps& view_stamps, const std::string& filename)
+{
+    std::ifstream f(filename);
+    std::string img_name;
+    double timestamp;
+
+    while(f>>img_name>>timestamp)
+    {
+        IndexT idx = GetIndexFromImageName(sfm_data,img_name);
+        if(idx!=UndefinedIndexT)
+        {
+            view_stamps[idx] = timestamp;
+        }
+    }
+}
 
 int main(int argc, char **argv)
 {
@@ -87,6 +122,7 @@ int main(int argc, char **argv)
   int triangulation_method = static_cast<int>(ETriangulationMethod::DEFAULT);
   int resection_method  = static_cast<int>(resection::SolverType::DEFAULT);
   std::string sSfM_IMU_Filename;
+  std::string sSfM_Stamp_Filename;
 
   cmd.add( make_option('i', sSfM_Data_Filename, "input_file") );
   cmd.add( make_option('m', sMatchesDir, "matchdir") );
@@ -100,6 +136,7 @@ int main(int argc, char **argv)
   cmd.add( make_option('t', triangulation_method, "triangulation_method"));
   cmd.add( make_option('r', resection_method, "resection_method"));
   cmd.add( make_option('u', sSfM_IMU_Filename,"imu_file"));
+  cmd.add( make_option('T',sSfM_Stamp_Filename,"timestamp_file"));
 
   try {
     if (argc == 1) throw std::string("Invalid parameter.");
@@ -184,6 +221,10 @@ int main(int argc, char **argv)
       imu_data.ReadFromCSV(sSfM_IMU_Filename);
   }
   SequentialSfMReconstructionEngineIMU::ViewStamps view_stamps;
+  if(!sSfM_Stamp_Filename.empty() && stlplus::file_exists(sSfM_Stamp_Filename))
+  {
+      ReadViewStamps(sfm_data,view_stamps,sSfM_Stamp_Filename);
+  }
 
   // Init the regions_type from the image describer file (used for image regions extraction)
   using namespace openMVG::features;

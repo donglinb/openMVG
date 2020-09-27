@@ -1,5 +1,7 @@
 add_subdirectory(imu_integrator)
 
+include_directories(${CERES_INCLUDE_DIRS})
+
 add_executable(openMVG_main_IncrementalSfM_IMU 
     main_IncrementalSfM_IMU.cpp 
     sequential_SfM_IMU.cpp

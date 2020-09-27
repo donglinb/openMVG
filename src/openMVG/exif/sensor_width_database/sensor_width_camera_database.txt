@@ -2221,6 +2221,7 @@ Huawei Honor V8;4.54
 Huawei Maimang 4;4.71
 Huawei Maimang 5;5.22
 Huawei Mate 10 Pro;5
+Huawei Mate 20 Pro;7.44
 Huawei Mate 8;5.22
 Huawei Mate S;4.71
 Huawei Nexus 6P;6.25

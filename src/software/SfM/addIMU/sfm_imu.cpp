@@ -54,27 +54,27 @@ bool csvReader::readline()
     std::string part;
 
 
-//    for(int i=0;i<10;i++)
-//    {
-//        getline(_readStr,part,',');
-//        data[i] = atof(part.c_str());
-//    }
-
-    for(int i=0;i<7;i++)
+    for(int i=0;i<10;i++)
     {
         getline(_readStr,part,',');
         data[i] = atof(part.c_str());
     }
-    for(int i=7;i<10;i++)
-    {
-        data[i] = 0;
-    }
-    for(int i=1;i<4;i++)
-    {
-        double temp = data[i];
-        data[i] = data[i+3];
-        data[i+3] = temp;
-    }
+
+//    for(int i=0;i<7;i++)
+//    {
+//        getline(_readStr,part,',');
+//        data[i] = atof(part.c_str());
+//    }
+//    for(int i=7;i<10;i++)
+//    {
+//        data[i] = 0;
+//    }
+//    for(int i=1;i<4;i++)
+//    {
+//        double temp = data[i];
+//        data[i] = data[i+3];
+//        data[i+3] = temp;
+//    }
 
     bool flag = false;
     for(int i=1;i<10;i++)

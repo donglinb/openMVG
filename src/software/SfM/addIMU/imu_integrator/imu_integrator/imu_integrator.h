@@ -66,7 +66,7 @@ private:
     /** 
      * Setup the MSCKF. The IMU propagation is done by MSCKF. 
      */
-    void setup_msckf();
+    void setup_msckf(const std::string config = "");
     
     /** 
      * Flag whether the initialization has finished.

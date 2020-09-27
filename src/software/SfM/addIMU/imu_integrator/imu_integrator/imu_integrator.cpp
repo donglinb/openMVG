@@ -1,6 +1,8 @@
 #include <iostream>
+#include <fstream>
 
 #include "imu_integrator.h"
+#include <yaml-cpp/yaml.h>
 
 namespace IMUDynamics
 {
@@ -83,9 +85,22 @@ void IMUIntegrator::initialize_imu()
       "\n--g " << init_imu_state_.g.transpose()<<std::endl;
 }
 
-void IMUIntegrator::setup_msckf()
+void IMUIntegrator::setup_msckf(const std::string config)
 {
     // TODO: reading the parameters from external yaml config file, or remove this part.
+    std::ifstream fin;
+    YAML::Node cfg;
+    if(!config.empty())
+    {
+        fin.open(config);
+        if(!fin)
+        {
+            std::cout<<"Cannot open file: "<<config<<std::endl;
+            return;
+        }
+        cfg = YAML::Load(fin);
+        cfg["has_cfg"] = true;
+    }
     
     camera_.f_u = 457.587;
     camera_.f_v = 456.134;
@@ -93,6 +108,32 @@ void IMUIntegrator::setup_msckf()
     camera_.c_v = 255.238;
     camera_.q_CI.setIdentity();
     camera_.p_C_I.setZero();
+    if(cfg["has_cfg"])
+    {
+        YAML::Node cam = cfg["cam0"];
+        YAML::Node intrinsics = cam["intrinsics"];
+        camera_.f_u = intrinsics[0].as<float>();
+        camera_.f_v = intrinsics[1].as<float>();
+        camera_.c_u = intrinsics[2].as<float>();
+        camera_.c_v = intrinsics[3].as<float>();
+
+        YAML::Node T = cam["T_cam_imu"];
+        Eigen::Matrix3f R;
+        Eigen::Vector3d t;
+        for(int i=0;i<3;i++)
+        {
+            for(int j=0;j<3;j++)
+            {
+                R(i,j) = T[i][j].as<float>();
+            }
+        }
+        for(int i=0;i<3;i++)
+        {
+            t(i) = T[i][3].as<float>();
+        }
+        camera_.q_CI = Quaternionf(R);
+        camera_.p_C_I = t;
+    }
     
     float feature_cov = 2.0;
 
