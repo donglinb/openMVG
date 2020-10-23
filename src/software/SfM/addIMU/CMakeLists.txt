@@ -15,6 +15,7 @@ target_link_libraries(openMVG_main_IncrementalSfM_IMU
     openMVG_sfm
     ${STLPLUS_LIBRARY}
     imu_integrator
+    yaml-cpp
 )
 
 add_executable(openMVG_main_SfMInit_ImageListingFromVideo main_SfMInit_ImageListingFromVideo.cpp)

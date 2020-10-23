@@ -96,6 +96,9 @@ struct SfM_IMU : public SfM_IMU_Base<double>
         vec_gyro.clear();
         timestamps.clear();
     }
+
+    std::vector<accelerometer_t> getAccelerometerPeriod(double startT, double endT);
+    std::vector<gyroscope_t> getGyroscopePeriod(double startT, double endT);
 };
 
 }  // namespace sfm

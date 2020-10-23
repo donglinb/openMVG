@@ -119,7 +119,7 @@ void IMUIntegrator::setup_msckf(const std::string config)
 
         YAML::Node T = cam["T_cam_imu"];
         Eigen::Matrix3f R;
-        Eigen::Vector3d t;
+        Eigen::Vector3f t;
         for(int i=0;i<3;i++)
         {
             for(int j=0;j<3;j++)
